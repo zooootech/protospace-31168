@@ -1,0 +1,15 @@
+<div class="card">
+  <%# image_tagメソッドを使用してimg要素を生成、引数にモデル名.画像ファイルを記述することで、その画像を表示 %>
+  <%# 本来、image_tagには()は付けないが、link_toの中で使用している為()を付ける %>
+  <%# link_toメソッドで、リンク先が詳細ページになるようリンクを設定 %>
+  <%# 詳細ページが、投稿されたどのprototypeか判別するために、prototype_pathの引数にprototypeを指定（展開先のテンプレートにてlocalsオプションが働いて、prototype = @prototypeとなる） %>
+  <%= link_to image_tag(prototype.image, class: :card__img ), prototype_path(prototype), method: :get %>
+  <div class="card__body">
+    <%= link_to prototype.title, prototype_path(prototype), class: :card__title, method: :get%>
+    <p class="card__summary">
+      <%= prototype.catch_copy %>
+    </p>
+    <%# 文字列の中で式展開を用いて変数を利用し、"by プロトタイプの投稿者名"を記述 %>
+    <%= link_to "by #{prototype.user.name}", user_path(prototype.user), class: :card__user %>
+  </div>
+</div>

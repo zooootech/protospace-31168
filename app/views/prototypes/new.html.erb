@@ -1,0 +1,10 @@
+<div class="main">
+  <div class="inner">
+    <div class="form__wrapper">
+      <h2 class="page-heading">新規プロトタイプ投稿</h2>
+<%# renderメソッド、partialオプションを使用し、部分テンプレートでフォームを表示する(localsオプションのバリューにハッシュが用いられ、
+そのハッシュの中のキーが部分テンプレートの中で使用されている変数prototypeを表しており、その変数にハッシュのバリュー@prototypeが代入される) %>
+        <%= render partial: 'form', locals: { prototype: @prototype } %>
+    </div>
+  </div>
+</div>
