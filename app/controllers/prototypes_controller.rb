@@ -16,7 +16,7 @@ class PrototypesController < ApplicationController
   def create
     # ストロングパラメーターprototype_paramsメソッドを呼び出してオブジェクトを生成
     @prototype = Prototype.new(prototype_params)
-    # createアクションにてデータが保存されたときはルートパスに戻る
+    # createアクションのsaveメソッドにてデータが保存されたときはルートパスに戻る
     if @prototype.save
       redirect_to root_path
     else
@@ -27,6 +27,8 @@ class PrototypesController < ApplicationController
 
   def show
     # findメソッドを使い、特定のレコードの情報を取得
+    # paramsは送られてきたパラメーターをハッシュのような構造で格納したもの
+    # paramsのキーを指定してあげることでその値を取得できる（今回の場合はidなのでinteger型の値が取得できる）
     @prototype = Prototype.find(params[:id])
     @comment = Comment.new
     # 指定されたprototypeに紐付けられている全てのコメントを変数@commentsに代入
@@ -34,11 +36,11 @@ class PrototypesController < ApplicationController
   end
 
   def edit
-    # Pathパラメータで送信されるID値で、Prototypeモデルの特定のオブジェクトを取得するように記述し、それを@prototypeに代入した
+    # Pathパラメーターで送信されるID値で、Prototypeモデルの特定のオブジェクトを取得するように記述し、それを@prototypeに代入した
     @prototype = Prototype.find(params[:id])
     # ログインしているユーザーと選択したprototypeの投稿者が一致していない場合
-    # 投稿者以外がeditアクションにアクセスしたらトップページにリダイレクトする
     unless current_user == @prototype.user
+      # 投稿者以外がeditアクションにアクセスしたらトップページにリダイレクトする
       redirect_to root_path
     end
   end
