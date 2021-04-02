@@ -1,3 +1,6 @@
+<%# レイアウトテンプレートとは、アプリケーションのビューファイルの共通部分をまとめたもの %>
+<%# Railsの場合、application.html.erbというファイルがレイアウトテンプレートとなる %>
+<%# application.html.erbはレイアウトファイルとも呼ばれる %>
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,6 +8,10 @@
     <title>ProtoSpace</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
+    <%# stylesheet_link_tagメソッドは読み込むCSSファイルを指定できるヘルパーメソッド
+    読み込むためのCSSファイルはapp/assets/stylesheets/というディレクトリに配置 %>
+    <%# application.html.erbのstylesheet_link_tagの引数には、'application'と書いてあるため、
+    app/assets/stylesheets/ディレクトリ内のapplication.cssというCSSファイルを読み込むことを示している %>
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,700,900&display=swap" rel="stylesheet">
@@ -38,6 +45,8 @@
       </div>
     </header>
     <%# レイアウトテンプレートであるapplication.html.erbに各テンプレートファイルを展開するためのメソッド %>
+    <%# yieldを記述することで、indexアクションの場合はテンプレートファイルのindex.html.erbの内容が、newアクションの場合はnew.html.erbが、yield記述部分へ展開されるようになる %>
+    <%# yieldがあることで、「body要素内に各ビューファイルの記述が集約される」という仕組みができている %>
     <%= yield %>
     <footer class="footer">
       <p class="copyright">Copyright © PROTO SPACE All rights reserved.</p>
